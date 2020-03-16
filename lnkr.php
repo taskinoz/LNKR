@@ -2,20 +2,36 @@
   include 'key.php';
   $fileName = "Links-".date("Y-m-d").".txt";
 
+  // Cleanup directory paths
+  if ($dirctory!="") {
+    // Create directory if it doesnt exist
+    if (!file_exists($dirctory)) {
+      mkdir($dirctory);
+    }
+    $dirctory = "./".$dirctory."/";
+  }
+  else {
+    $dirctory = "./";
+  }
+
+  // If directory exists
   if (isset($_GET['l']) && $_GET['k']==$key){
     $websiteLink = $_GET['l'];
+
     // Check for file
-    if (file_exists("./".$filename)) {
-      $fp = fopen($fileName, 'a');//opens file in append mode
+    if (file_exists($dirctory.$fileName)) {
+      $fp = fopen($dirctory.$fileName, 'a');//opens file in append mode
       fwrite($fp, $websiteLink."\n");
       fclose($fp);
     }
+    // Create new file if it doesnt exist
     else {
-      $fp = fopen($fileName, 'w');//Create file in write mode
+      $fp = fopen($dirctory.$fileName, 'w');//Create file in write mode
       fwrite($fp, $websiteLink."\n");
       fclose($fp);
     }
-    // Go to website
+
+    // Go back to original website
     header("Location: ".$websiteLink);
     exit();
   }
