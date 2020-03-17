@@ -15,7 +15,7 @@
   }
 
   // If directory exists
-  if (isset($_GET['l']) && $_GET['k']==$key){
+  if ((isset($_GET['l']) && isset($_GET['k'])) && $_GET['k']==$key){
     $websiteLink = $_GET['l'];
 
     // Check for file
