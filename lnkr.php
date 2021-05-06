@@ -21,13 +21,13 @@
     // Check for file
     if (file_exists($dirctory.$fileName)) {
       $fp = fopen($dirctory.$fileName, 'a');//opens file in append mode
-      fwrite($fp, $websiteLink."\n");
+      fwrite($fp, "\n".$websiteLink);
       fclose($fp);
     }
     // Create new file if it doesnt exist
     else {
       $fp = fopen($dirctory.$fileName, 'w');//Create file in write mode
-      fwrite($fp, $websiteLink."\n");
+      fwrite($fp, $websiteLink);
       fclose($fp);
     }
 
