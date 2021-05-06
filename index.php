@@ -15,6 +15,13 @@
       // Get Key File
       include "key.php";
 
+      function readFileContents($filename){
+        $rfcfile = fopen($filename, "r") or die("Unable to open file!");
+        $rfcstr = fread($rfcfile,filesize($filename));
+        fclose($rfcfile);
+        return $rfcstr;
+      }
+
       // Correct '' => ,
       if (isset($_GET['k']) && $_GET['k']==$key){ ?>
         <h1>KEY</h1>
@@ -22,6 +29,12 @@
           <?php
             foreach (glob($dirctory."*.txt") as $fileName) {
               echo '<li><a href="'.$fileName.'" target="_blank">'. str_replace("",".txt",$fileName).'</a></li>'."\n";
+              $split = explode("\n", readFileContents($fileName));
+              echo "<ul>";
+              for ($i=0; $i<count($split);$i++) {
+                echo "<li><a href=".$split[$i].">".$split[$i]."</a></li>"."\n";
+              }
+              echo "</ul>";
             }
           ?>
         </ul>
