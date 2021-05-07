@@ -15,6 +15,13 @@
       // Get Key File
       include "key.php";
 
+      // If directory contains a slash
+      if (isset($dirctory)) {
+        if (substr($dirctory, -1)!="/"){
+          $dirctory = $dirctory."/";
+        }
+      }
+
       function readFileContents($filename){
         $rfcfile = fopen($filename, "r") or die("Unable to open file!");
         $rfcstr = fread($rfcfile,filesize($filename));
@@ -32,7 +39,9 @@
               $split = explode("\n", readFileContents($fileName));
               echo "<ul>";
               for ($i=0; $i<count($split);$i++) {
-                echo "<li><a href=".$split[$i].">".$split[$i]."</a></li>"."\n";
+                if ($split[$i]!="") {
+                  echo "<li><a href=".$split[$i]." target=\"_blank\" ref=\"noreferrer noopener\">".$split[$i]."</a></li>"."\n";
+                }
               }
               echo "</ul>";
             }
