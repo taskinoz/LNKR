@@ -31,7 +31,7 @@
 
       // Correct '' => ,
       if (isset($_GET['k']) && $_GET['k']==$key){ ?>
-        <h1>KEY</h1>
+        <h1>Saved Links</h1>
         <ul>
           <?php
             foreach (glob($dirctory."*.txt") as $fileName) {
@@ -56,10 +56,10 @@
 
       // No Key
       else { ?>
-        <h1>No KEY</h1>
+        <h1>Enter Your<br>Key</h1>
         <form method="get">
-          <input type="text" name="k">
-          <input type="submit" value="search">
+          <input type="password" name="k">
+          <input type="submit" value="Enter">
         </form>
       <?php }
 
